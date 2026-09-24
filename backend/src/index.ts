@@ -360,9 +360,10 @@ app.get('/api/health', (_req: Request, res: Response) => {
   const start = process.hrtime();
   const database = checkDbHealth();
   const indexer = getIndexerStatus();
-  
-  // Healthy if DB is reachable and indexer isn't stuck failing
-  const healthy = database.reachable && indexer.consecutiveFailures < 3;
+
+  // Operators distinguish healthy-but-idle from stale/failing via indexer.freshness.
+  // Degrade when DB is down or indexer is stale/failing (isHealthy already encodes this).
+  const healthy = database.reachable && indexer.isHealthy;
 
   const end = process.hrtime(start);
   const latencyMs = Number(((end[0] * 1e9 + end[1]) / 1e6).toFixed(3));
@@ -373,6 +374,8 @@ app.get('/api/health', (_req: Request, res: Response) => {
     latency_ms: latencyMs,
     db_reachable: database.reachable,
     indexer_healthy: indexer.isHealthy,
+    indexer_freshness: indexer.freshness,
+    indexer_lag_ms: indexer.lagMs,
   });
 
   const memUsage = process.memoryUsage();
@@ -432,7 +435,9 @@ app.get('/api/health/deep', applyRateLimit(1000), async (_req: Request, res: Res
     }
 
     const indexer = getIndexerStatus();
-    const allHealthy = database.reachable && hasContractId && sorobanHealthy && indexer.consecutiveFailures === 0;
+    // Align overall with component.indexer.status (isHealthy includes freshness/lag).
+    const allHealthy =
+      database.reachable && hasContractId && sorobanHealthy && indexer.isHealthy;
 
     const end = process.hrtime(start);
     const latencyMs = Number(((end[0] * 1e9 + end[1]) / 1e6).toFixed(3));
@@ -444,6 +449,8 @@ app.get('/api/health/deep', applyRateLimit(1000), async (_req: Request, res: Res
       db_reachable: database.reachable,
       soroban_healthy: sorobanHealthy,
       indexer_healthy: indexer.isHealthy,
+      indexer_freshness: indexer.freshness,
+      indexer_lag_ms: indexer.lagMs,
       has_contract_id: hasContractId,
     });
 
