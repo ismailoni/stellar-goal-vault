@@ -232,7 +232,7 @@ sudo systemctl restart stellar-goal-vault-backend
 
 ---
 
-### 4. `components.soroban.status: "down"` (deep check only)
+### 5. `components.soroban.status: "down"` (deep check only)
 
 **What it means:** The `getHealth` JSON-RPC call to `SOROBAN_RPC_URL` timed out or returned HTTP 5xx.
 
@@ -262,7 +262,7 @@ sudo systemctl restart stellar-goal-vault-backend
 
 ---
 
-### 5. `components.contract.status: "down"` (deep check only)
+### 6. `components.contract.status: "down"` (deep check only)
 
 **What it means:** `CONTRACT_ID` environment variable is not set. Freighter-backed pledge signing will not work, but the REST API continues to operate.
 
@@ -289,7 +289,7 @@ sudo systemctl restart stellar-goal-vault-backend
 
 ---
 
-### 6. `memory.heapUsed` growing over time
+### 7. `memory.heapUsed` growing over time
 
 **What it means:** The Node.js heap is not being garbage-collected efficiently. Sustained growth without stabilization suggests a memory leak.
 
@@ -326,7 +326,7 @@ See also: [RUNBOOK.md — Backend OOM](../RUNBOOK.md#2-backend-oom-out-of-memory
 
 ---
 
-### 7. `status: "degraded"` / HTTP 503 from shallow endpoint
+### 8. `status: "degraded"` / HTTP 503 from shallow endpoint
 
 **What it means:** At least one of `database.reachable` or `indexer.isHealthy` is false. The API is still running but in a degraded state.
 
@@ -343,7 +343,7 @@ Follow the appropriate playbook above depending on which component shows failure
 
 ---
 
-### 8. `overall: "down"` from deep endpoint when shallow reports `"ok"`
+### 9. `overall: "down"` from deep endpoint when shallow reports `"ok"`
 
 **What it means:** The DB and indexer are healthy, but either `CONTRACT_ID` is unset or the Soroban RPC is unreachable. The API and campaign operations continue normally; only on-chain features are affected.
 
