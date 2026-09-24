@@ -1,0 +1,33 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "dependabot/npm_and_yarn/backend/asteasolutions/zod-to-openapi-9.1.0",
+    "dependabot/npm_and_yarn/backend/redis-6.2.1",
+    "dependabot/npm_and_yarn/backend/types/node-26.5.1",
+    "dependabot/npm_and_yarn/backend/vitest-5.0.0",
+    "dependabot/npm_and_yarn/frontend/stellar/freighter-api-6.0.1",
+    "dependabot/npm_and_yarn/frontend/tailwindcss-4.3.3",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "dependabot/npm_and_yarn/backend/asteasolutions/zod-to-openapi-9.1.0": "main",
+    "dependabot/npm_and_yarn/backend/redis-6.2.1": "main",
+    "dependabot/npm_and_yarn/backend/types/node-26.5.1": "main",
+    "dependabot/npm_and_yarn/backend/vitest-5.0.0": "main",
+    "dependabot/npm_and_yarn/frontend/stellar/freighter-api-6.0.1": "main",
+    "dependabot/npm_and_yarn/frontend/tailwindcss-4.3.3": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "dependabot/npm_and_yarn/backend/asteasolutions/zod-to-openapi-9.1.0",
+    "dependabot/npm_and_yarn/backend/redis-6.2.1",
+    "dependabot/npm_and_yarn/backend/types/node-26.5.1",
+    "dependabot/npm_and_yarn/backend/vitest-5.0.0",
+    "dependabot/npm_and_yarn/frontend/stellar/freighter-api-6.0.1",
+    "dependabot/npm_and_yarn/frontend/tailwindcss-4.3.3",
+    "origin"
+  ]
+}
